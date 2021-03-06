@@ -71,9 +71,11 @@ import 'package:zoon_player/constants/asset_locations.dart';
 
 class Background extends StatelessWidget {
   final ScrollController scrollController;
+  final Widget scaffold;
 
   const Background(
-    this.scrollController, {
+    this.scrollController,
+    this.scaffold, {
     Key key,
   }) : super(key: key);
   get offset => scrollController.hasClients ? scrollController.offset : 0;
@@ -82,35 +84,40 @@ class Background extends StatelessWidget {
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
     final accentColor = theme.accentColor;
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            primaryColor,
-            accentColor,
-          ],
-        ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomRight,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AnimatedBuilder(
-            animation: scrollController,
-            child: SvgPicture.asset(
-              kZuneLogo,
+    return Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                primaryColor,
+                accentColor,
+              ],
             ),
-            builder: (context, child) => Transform.rotate(
-              angle: ((pi * offset) / -1024),
-              child: child,
+          ),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AnimatedBuilder(
+                animation: scrollController,
+                child: SvgPicture.asset(
+                  kZuneLogo,
+                ),
+                builder: (context, child) => Transform.rotate(
+                  angle: ((pi * offset) / -1024),
+                  child: child,
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        scaffold
+      ],
     );
   }
 }
