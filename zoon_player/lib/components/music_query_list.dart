@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:provider/provider.dart';
 import 'package:zoon_player/services/music_service.dart';
+import 'package:zoon_player/views/music_view/sub_views/song_view.dart';
 
 class MusicQueryList extends StatelessWidget {
   final MusicQueryType queryType;
+  final ScrollController scrollController;
 
-  const MusicQueryList(this.queryType, {Key key}) : super(key: key);
+  const MusicQueryList(this.queryType, this.scrollController, {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class MusicQueryList extends StatelessWidget {
                               style:
                                   Theme.of(context).primaryTextTheme.bodyText1,
                             ))
-                        : _ItemButton(queryType, items[index - 1])),
+                        : _ItemButton(queryType, index - 1, items)),
               ),
             );
           } else {
@@ -49,23 +52,28 @@ class MusicQueryList extends StatelessWidget {
 
 class _ItemButton extends StatelessWidget {
   final MusicQueryType queryType;
-  final item;
+  final int index;
+  final items;
 
-  _ItemButton(this.queryType, this.item);
+  _ItemButton(this.queryType, this.index, this.items);
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).primaryTextTheme.bodyText1;
     if (queryType == MusicQueryType.songs) {
-      final song = item as SongInfo;
+      final song = items[index] as SongInfo;
+      final songs = items as List<SongInfo>;
       return TextButton(
-        onPressed: () => print(song.toString()),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => SongView(index, songs))),
         child: Text(
           song.title,
           style: textTheme,
         ),
       );
     } else if (queryType == MusicQueryType.genres) {
-      final genre = item as GenreInfo;
+      final genre = items[index] as GenreInfo;
       return TextButton(
         onPressed: () => print(genre.toString()),
         child: Text(
@@ -74,7 +82,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.albums) {
-      final album = item as AlbumInfo;
+      final album = items[index] as AlbumInfo;
       return TextButton(
         onPressed: () => print(album.toString()),
         child: Text(
@@ -83,7 +91,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.artists) {
-      final artist = item as ArtistInfo;
+      final artist = items[index] as ArtistInfo;
       return TextButton(
         onPressed: () => print(artist.toString()),
         child: Text(
@@ -92,7 +100,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.playlists) {
-      final playlist = item as PlaylistInfo;
+      final playlist = items[index] as PlaylistInfo;
       return TextButton(
         onPressed: () => print(playlist.toString()),
         child: Text(

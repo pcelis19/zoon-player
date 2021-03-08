@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:zoon_player/constants/routes.dart';
 import 'package:zoon_player/services/music_service.dart';
 import 'package:zoon_player/views/home.dart';
-import 'package:zoon_player/views/music.dart';
+
+import 'views/music_view/music_view.dart';
 
 void main() {
   runApp(
@@ -16,6 +17,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final bool DEBUG = true;
+  final baseTheme = ThemeData.dark();
 
   // This widget is the root of your application.
   @override
@@ -26,12 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.pinkAccent,
-        textTheme: ThemeData.dark().textTheme,
-        textButtonTheme: ThemeData.dark().textButtonTheme,
-        accentTextTheme: ThemeData.dark().accentTextTheme,
-        primaryTextTheme: ThemeData.dark().primaryTextTheme,
-        buttonTheme: ThemeData.dark().buttonTheme,
-        elevatedButtonTheme: ThemeData.dark().elevatedButtonTheme,
+        textTheme: baseTheme.textTheme,
+        textButtonTheme: baseTheme.textButtonTheme,
+        accentTextTheme: baseTheme.accentTextTheme,
+        primaryTextTheme: baseTheme.primaryTextTheme,
+        buttonTheme: baseTheme.buttonTheme,
+        elevatedButtonTheme: baseTheme.elevatedButtonTheme,
+        iconTheme: baseTheme.iconTheme.copyWith(color: Colors.white),
         pageTransitionsTheme: PageTransitionsTheme(
           builders: {
             TargetPlatform.android: ZoomPageTransitionsBuilder(),
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => Home());
           case kMusic:
             return MaterialPageRoute(
-                builder: (context) => Music(
+                builder: (context) => MusicView(
                     (routeSettings.arguments as Map<String, String>)["title"]));
           default:
             throw UnimplementedError('no route for $routeSettings');
