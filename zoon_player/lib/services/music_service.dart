@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 
@@ -10,6 +11,7 @@ class MusicService {
   List<AlbumInfo> _albums;
   List<ArtistInfo> _artists;
   List<PlaylistInfo> _playlists;
+  final FlutterAudioQuery _flutterAudioQuery = FlutterAudioQuery();
 
   Future<List> fetchInfo(MusicQueryType queryType) {
     if (queryType == MusicQueryType.songs)
@@ -47,34 +49,38 @@ class MusicService {
     return _mFetchPlaylists(1);
   }
 
+  Future<Uint8List> getArtwork(SongInfo song) {
+    return _flutterAudioQuery.getArtwork(type: ResourceType.SONG, id: song.id);
+  }
+
   // TODO find a way to use compute, the private functions purposely take an argument so that they work with compute
   Future<List<SongInfo>> _mFetchSongs(int garbage) async {
     if (_songs != null && _songs.isNotEmpty) return _songs;
-    _songs = await FlutterAudioQuery().getSongs();
+    _songs = await _flutterAudioQuery.getSongs();
     return _songs;
   }
 
   Future<List<GenreInfo>> _mFetchGenres(int garbage) async {
     if (_genres != null && _genres.isNotEmpty) return _genres;
-    _genres = await FlutterAudioQuery().getGenres();
+    _genres = await _flutterAudioQuery.getGenres();
     return _genres;
   }
 
   Future<List<AlbumInfo>> _mFetchAlbums(int garbage) async {
     if (_albums != null && _albums.isNotEmpty) return _albums;
-    _albums = await FlutterAudioQuery().getAlbums();
+    _albums = await _flutterAudioQuery.getAlbums();
     return _albums;
   }
 
   Future<List<ArtistInfo>> _mFetchArtists(int garbage) async {
     if (_artists != null && _artists.isNotEmpty) return _artists;
-    _artists = await FlutterAudioQuery().getArtists();
+    _artists = await _flutterAudioQuery.getArtists();
     return _artists;
   }
 
   Future<List<PlaylistInfo>> _mFetchPlaylists(int garbage) async {
     if (_playlists != null && _playlists.isNotEmpty) return _playlists;
-    _playlists = await FlutterAudioQuery().getPlaylists();
+    _playlists = await _flutterAudioQuery.getPlaylists();
     return _playlists;
   }
 }

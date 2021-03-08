@@ -38,7 +38,12 @@ class MusicQueryList extends StatelessWidget {
                               style:
                                   Theme.of(context).primaryTextTheme.bodyText1,
                             ))
-                        : _ItemButton(queryType, index - 1, items)),
+                        : _ItemButton(
+                            queryType: queryType,
+                            index: index - 1,
+                            items: items,
+                            scrollController: scrollController,
+                          )),
               ),
             );
           } else {
@@ -53,20 +58,18 @@ class MusicQueryList extends StatelessWidget {
 class _ItemButton extends StatelessWidget {
   final MusicQueryType queryType;
   final int index;
-  final items;
+  final List items;
+  final ScrollController scrollController;
 
-  _ItemButton(this.queryType, this.index, this.items);
+  _ItemButton({this.queryType, this.index, this.items, this.scrollController});
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).primaryTextTheme.bodyText1;
     if (queryType == MusicQueryType.songs) {
       final song = items[index] as SongInfo;
-      final songs = items as List<SongInfo>;
+      final allSongs = items as List<SongInfo>;
       return TextButton(
-        onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => SongView(index, songs))),
+        onPressed: () => songPressedLogic(context, allSongs),
         child: Text(
           song.title,
           style: textTheme,
@@ -111,5 +114,17 @@ class _ItemButton extends StatelessWidget {
     } else
       throw UnimplementedError(
           'Music query type unaccounted for: ${queryType.toString()}');
+  }
+
+  void songPressedLogic(BuildContext context, List<SongInfo> allSongs) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => SongView(
+          index: index,
+          allSongs: allSongs,
+        ),
+      ),
+    );
   }
 }

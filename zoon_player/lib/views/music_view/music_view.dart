@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:zoon_player/components/music_query_list.dart';
 import 'package:zoon_player/services/music_service.dart';
+import 'package:zoon_player/views/music_view/sub_widgets/label_text.dart';
 import 'package:zoon_player/widgets/background.dart';
 import 'package:zoon_player/widgets/main_menu_text.dart';
 
@@ -61,16 +62,11 @@ class Label extends StatelessWidget {
   Label(this.label);
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final titleStyle = themeData.textTheme.headline4;
     return Transform.translate(
       offset: Offset(-42, 0),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text(
-          label,
-          style: titleStyle,
-        ),
+        child: LabelText(title: label),
       ),
     );
   }

@@ -61,7 +61,9 @@ class MenuButton extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
         child: TextButton(
-          child: MainMenuText(title: title),
+          child: MainMenuText(
+            title: title,
+          ),
           onPressed: () => Navigator.of(context)
               .pushNamed(routeName, arguments: {"title": title}),
         ),
