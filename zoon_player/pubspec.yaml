@@ -33,6 +33,8 @@ dependencies:
   just_audio: 0.6.15+1
   flutter_audio_query: ^0.3.5+6
   provider: ^5.0.0
+  awesome_dialog: ^1.3.2
+  podcast_search: ^0.3.9
 
 dev_dependencies:
   flutter_test:

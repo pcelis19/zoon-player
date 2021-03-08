@@ -33,8 +33,9 @@ class Home extends StatelessWidget {
                 delegate: SliverChildListDelegate(
                   [
                     MenuButton(title: "music", routeName: kMusic),
-                    MenuButton(title: "videos", routeName: kVideos),
-                    MenuButton(title: "pictures", routeName: kPictures),
+                    MenuButton(title: "podcast", routeName: kPodcasts),
+                    // MenuButton(title: "videos", routeName: kVideos),
+                    // MenuButton(title: "pictures", routeName: kPictures),
                     MenuButton(title: "social", routeName: kSocial),
                     MenuButton(title: "radio", routeName: kRadio),
                     MenuButton(title: "marketplace", routeName: kMarketPlace),

@@ -3,6 +3,7 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:provider/provider.dart';
 import 'package:zoon_player/services/music_service.dart';
 import 'package:zoon_player/views/music_view/sub_views/song_view.dart';
+import 'package:zoon_player/widgets/feature_pending.dart';
 
 class MusicQueryList extends StatelessWidget {
   final MusicQueryType queryType;
@@ -32,7 +33,7 @@ class MusicQueryList extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: index == 0
                         ? TextButton(
-                            onPressed: () => print('shuffle'),
+                            onPressed: () => pendingFeature(context),
                             child: Text(
                               'shuffle all',
                               style:
@@ -78,7 +79,7 @@ class _ItemButton extends StatelessWidget {
     } else if (queryType == MusicQueryType.genres) {
       final genre = items[index] as GenreInfo;
       return TextButton(
-        onPressed: () => print(genre.toString()),
+        onPressed: () => pendingFeature(context),
         child: Text(
           genre.name,
           style: textTheme,
@@ -87,7 +88,7 @@ class _ItemButton extends StatelessWidget {
     } else if (queryType == MusicQueryType.albums) {
       final album = items[index] as AlbumInfo;
       return TextButton(
-        onPressed: () => print(album.toString()),
+        onPressed: () => pendingFeature(context),
         child: Text(
           album.title,
           style: textTheme,
@@ -96,7 +97,7 @@ class _ItemButton extends StatelessWidget {
     } else if (queryType == MusicQueryType.artists) {
       final artist = items[index] as ArtistInfo;
       return TextButton(
-        onPressed: () => print(artist.toString()),
+        onPressed: () => pendingFeature(context),
         child: Text(
           artist.name,
           style: textTheme,
@@ -105,7 +106,7 @@ class _ItemButton extends StatelessWidget {
     } else if (queryType == MusicQueryType.playlists) {
       final playlist = items[index] as PlaylistInfo;
       return TextButton(
-        onPressed: () => print(playlist.toString()),
+        onPressed: () => pendingFeature(context),
         child: Text(
           playlist.name,
           style: textTheme,

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:zoon_player/services/music_service.dart';
 import 'package:zoon_player/views/music_view/sub_widgets/label_text.dart';
 import 'package:zoon_player/widgets/background.dart';
+import 'package:zoon_player/widgets/feature_pending.dart';
 
 class SongView extends StatefulWidget {
   final List<SongInfo> allSongs;
@@ -154,14 +155,15 @@ class _SongViewState extends State<SongView> {
                             color: Colors.white,
                           ),
                           title: Text("play"),
+                          onTap: () => pendingFeature(context),
                         ),
                         ListTile(
-                          leading: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                          title: Text("add to now playing"),
-                        ),
+                            leading: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            title: Text("add to now playing"),
+                            onTap: () => pendingFeature(context)),
                         Expanded(
                           child: Container(
                             color: Colors.transparent,
