@@ -1,11 +1,8 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-import 'package:provider/provider.dart';
-import 'package:zoon_player/services/music_service.dart';
+import 'package:zoon_player/utils/size_config.dart';
 import 'package:zoon_player/views/music_view/sub_widgets/label_text.dart';
+import 'package:zoon_player/widgets/album_cover_art.dart';
 import 'package:zoon_player/widgets/background.dart';
 import 'package:zoon_player/widgets/feature_pending.dart';
 
@@ -29,7 +26,6 @@ class _SongViewState extends State<SongView> {
   int previousPage;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currentPage = widget.index;
     previousPage = currentPage;
@@ -38,13 +34,14 @@ class _SongViewState extends State<SongView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    SizeConfig().init(context);
     final songTextStyle = theme.primaryTextTheme.headline1.copyWith(
         fontSize: theme.primaryTextTheme.headline6.fontSize,
         color: Colors.white);
     final disabledColored = theme.disabledColor;
     return Background(
-      widget._songPageController,
-      SafeArea(
+      scrollController: widget._songPageController,
+      scaffold: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -86,31 +83,7 @@ class _SongViewState extends State<SongView> {
                       itemCount: widget.allSongs.length,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: FutureBuilder<Uint8List>(
-                            future: Provider.of<MusicService>(context)
-                                .getArtwork(widget.allSongs[index]),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData &&
-                                  snapshot.data != null &&
-                                  snapshot.data.isNotEmpty) {
-                                return Image.memory(
-                                  snapshot.data,
-                                );
-                              } else {
-                                return Container(
-                                  height: 40,
-                                  width: 40,
-                                  color: Colors.black,
-                                  child: Center(
-                                    child: Text(
-                                        widget.allSongs[currentPage].album !=
-                                                null
-                                            ? widget.allSongs[currentPage].album
-                                            : 'no album info'),
-                                  ),
-                                );
-                              }
-                            }),
+                        child: AlbumCoverArt(widget.allSongs[index]),
                       ),
                     ),
                   ),

@@ -16,7 +16,6 @@
 //   AnimationController _controller;
 //   @override
 //   void initState() {
-//     // TODO: implement initState
 //     super.initState();
 //     _controller =
 //         AnimationController(vsync: this, duration: const Duration(seconds: 4))
@@ -25,7 +24,6 @@
 
 //   @override
 //   void dispose() {
-//     // TODO: implement dispose
 //     _controller.dispose();
 //     super.dispose();
 //   }
@@ -73,10 +71,10 @@ class Background extends StatelessWidget {
   final ScrollController scrollController;
   final Widget scaffold;
 
-  const Background(
-    this.scrollController,
-    this.scaffold, {
+  const Background({
     Key key,
+    this.scrollController,
+    this.scaffold,
   }) : super(key: key);
   get offset => scrollController.hasClients ? scrollController.offset : 0;
   @override
@@ -84,6 +82,28 @@ class Background extends StatelessWidget {
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
     final accentColor = theme.accentColor;
+
+    if (scrollController == null)
+      return Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  primaryColor,
+                  accentColor,
+                ],
+              ),
+            ),
+          ),
+          scaffold,
+        ],
+      );
+
     return Stack(
       children: [
         Container(

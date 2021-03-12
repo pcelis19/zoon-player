@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-import 'package:zoon_player/components/music_query_list.dart';
+import 'package:zoon_player/views/music_view/sub_widgets/music_query_list.dart';
 import 'package:zoon_player/services/music_service.dart';
 import 'package:zoon_player/views/music_view/sub_widgets/label_text.dart';
 import 'package:zoon_player/widgets/background.dart';
@@ -13,42 +13,65 @@ class MusicView extends StatelessWidget {
   MusicView(this.title, {Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return Provider<_MusicMembers>(
       create: (_) => _MusicMembers(),
       dispose: (context, value) => value.dispose(),
       builder: (context, child) {
         final musicMembers = Provider.of<_MusicMembers>(context);
         return Background(
-          musicMembers.titlePageController,
-          Scaffold(
+          scrollController: musicMembers.titlePageController,
+          scaffold: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               title: MainMenuText(title: title),
               elevation: 8,
             ),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 60,
-                  width: double.infinity,
-                  child: PageView(
-                    controller: musicMembers.titlePageController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: musicMembers.labelsAndContent.item1,
+            body: GestureDetector(
+              onHorizontalDragUpdate: (details) {
+                final titleController = musicMembers.titlePageController;
+                final contentController = musicMembers.queryPageController;
+                double sensitivity = .3;
+                // Note: Sensitivity is integer used when you don't want to mess up vertical drag
+                if (details.delta.dx > sensitivity) {
+                  titleController.previousPage(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInToLinear);
+                  contentController.previousPage(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInToLinear);
+                  // Right Swipe
+                } else if (details.delta.dx < -sensitivity) {
+                  titleController.nextPage(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInToLinear);
+                  contentController.nextPage(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInToLinear);
+
+                  //Left Swipe
+                }
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    child: PageView(
+                      controller: musicMembers.titlePageController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: musicMembers.labelsAndContent.item1,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: PageView(
-                    controller: musicMembers.queryPageController,
-                    onPageChanged: (value) => musicMembers.titlePageController
-                        .animateToPage(value,
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.fastLinearToSlowEaseIn),
-                    children: musicMembers.labelsAndContent.item2,
+                  Expanded(
+                    child: PageView(
+                      controller: musicMembers.queryPageController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: musicMembers.labelsAndContent.item2,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

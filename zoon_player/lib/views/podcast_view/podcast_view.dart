@@ -14,8 +14,8 @@ class PodcastsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Background(
-        _scrollController,
-        SafeArea(
+        scrollController: _scrollController,
+        scaffold: SafeArea(
             child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(title: MainMenuText(title: title)),

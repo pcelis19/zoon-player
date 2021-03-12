@@ -48,8 +48,23 @@ class MusicService {
     return _mFetchPlaylists(1);
   }
 
-  Future<Uint8List> getArtwork(SongInfo song) {
-    return _flutterAudioQuery.getArtwork(type: ResourceType.SONG, id: song.id);
+  Future<Uint8List> getArtwork(file) {
+    if (file is SongInfo) {
+      final song = file as SongInfo;
+      return _flutterAudioQuery.getArtwork(
+          type: ResourceType.SONG, id: song.id);
+    } else if (file is AlbumInfo) {
+      final album = file as AlbumInfo;
+      return _flutterAudioQuery.getArtwork(
+          type: ResourceType.ALBUM, id: album.id);
+    } else if (file is ArtistInfo) {
+      final artist = file as ArtistInfo;
+      return _flutterAudioQuery.getArtwork(
+          type: ResourceType.ARTIST, id: artist.id);
+    } else {
+      throw UnimplementedError(
+          "${file} is not of type SongInfo, AlbumInfo nor ArtistInfo");
+    }
   }
 
   // TODO find a way to use compute, the private functions purposely take an argument so that they work with compute

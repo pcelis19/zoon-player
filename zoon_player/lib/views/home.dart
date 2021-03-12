@@ -11,8 +11,8 @@ class Home extends StatelessWidget {
     final themeData = Theme.of(context);
     final headerTextTheme = themeData.textTheme.headline1;
     return Background(
-      _scrollController,
-      SafeArea(
+      scrollController: _scrollController,
+      scaffold: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: CustomScrollView(
@@ -33,11 +33,12 @@ class Home extends StatelessWidget {
                 delegate: SliverChildListDelegate(
                   [
                     MenuButton(title: "music", routeName: kMusic),
-                    MenuButton(title: "podcast", routeName: kPodcasts),
                     // MenuButton(title: "videos", routeName: kVideos),
                     // MenuButton(title: "pictures", routeName: kPictures),
                     MenuButton(title: "social", routeName: kSocial),
                     MenuButton(title: "radio", routeName: kRadio),
+
+                    MenuButton(title: "podcasts", routeName: kPodcasts),
                     MenuButton(title: "marketplace", routeName: kMarketPlace),
                     MenuButton(title: "settings", routeName: kSettings),
                   ],

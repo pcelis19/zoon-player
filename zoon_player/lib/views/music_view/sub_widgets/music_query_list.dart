@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:provider/provider.dart';
 import 'package:zoon_player/services/music_service.dart';
+import 'package:zoon_player/utils/size_config.dart';
 import 'package:zoon_player/views/music_view/sub_views/song_view.dart';
+import 'package:zoon_player/widgets/album_cover_art.dart';
 import 'package:zoon_player/widgets/feature_pending.dart';
 
 class MusicQueryList extends StatelessWidget {
@@ -28,6 +30,7 @@ class MusicQueryList extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.only(left: 32.0),
               child: ListView.builder(
+                controller: scrollController,
                 itemCount: items.length + 1,
                 itemBuilder: (context, index) => Align(
                     alignment: Alignment.centerLeft,
@@ -43,7 +46,6 @@ class MusicQueryList extends StatelessWidget {
                             queryType: queryType,
                             index: index - 1,
                             items: items,
-                            scrollController: scrollController,
                           )),
               ),
             );
@@ -60,11 +62,11 @@ class _ItemButton extends StatelessWidget {
   final MusicQueryType queryType;
   final int index;
   final List items;
-  final ScrollController scrollController;
 
-  _ItemButton({this.queryType, this.index, this.items, this.scrollController});
+  _ItemButton({this.queryType, this.index, this.items});
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     final textTheme = Theme.of(context).primaryTextTheme.bodyText1;
     if (queryType == MusicQueryType.songs) {
       final song = items[index] as SongInfo;
@@ -87,12 +89,18 @@ class _ItemButton extends StatelessWidget {
       );
     } else if (queryType == MusicQueryType.albums) {
       final album = items[index] as AlbumInfo;
-      return TextButton(
-        onPressed: () => pendingFeature(context),
-        child: Text(
+      return ListTile(
+        contentPadding: EdgeInsets.all(0),
+        onTap: () => pendingFeature(context),
+        leading: CircleAvatar(
+          child: AlbumCoverArt(album),
+        ),
+        title: Text(
           album.title,
           style: textTheme,
         ),
+        subtitle: Text(album.artist),
+        isThreeLine: true,
       );
     } else if (queryType == MusicQueryType.artists) {
       final artist = items[index] as ArtistInfo;
