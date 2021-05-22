@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zoon_player/constants/routes.dart';
 import 'package:zoon_player/services/music_service.dart';
+import 'package:zoon_player/services/podcast_service.dart';
 import 'package:zoon_player/views/home.dart';
 
 import 'views/music_view/music_view.dart';
@@ -20,6 +21,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final bool DEBUG = true;
   final baseTheme = ThemeData.dark();
+  final podcastService = PodcastService();
 
   // This widget is the root of your application.
   @override
@@ -55,7 +57,10 @@ class MyApp extends StatelessWidget {
           case kPodcasts:
             return MaterialPageRoute(
                 builder: (context) => PodcastsView(
-                    (routeSettings.arguments as Map<String, String>)["title"]));
+                      title: (routeSettings.arguments
+                          as Map<String, String>)["title"],
+                      service: podcastService,
+                    ));
           default:
             throw UnimplementedError('no route for $routeSettings');
         }
