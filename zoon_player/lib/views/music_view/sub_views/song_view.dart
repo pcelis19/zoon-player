@@ -10,11 +10,11 @@ import 'package:zoon_player/widgets/background.dart';
 import 'package:zoon_player/widgets/feature_pending.dart';
 
 class SongView extends StatefulWidget {
-  final List<SongInfo> allSongs;
+  final List<SongInfo>? allSongs;
   final PageController _songPageController;
   final PageController _albumPageController;
   final int index;
-  SongView({this.index, this.allSongs})
+  SongView({required this.index, this.allSongs})
       : _songPageController =
             PageController(initialPage: index, viewportFraction: .4),
         _albumPageController =
@@ -25,8 +25,8 @@ class SongView extends StatefulWidget {
 }
 
 class _SongViewState extends State<SongView> {
-  int currentPage;
-  int previousPage;
+  int? currentPage;
+  int? previousPage;
   @override
   void initState() {
     // TODO: implement initState
@@ -38,8 +38,8 @@ class _SongViewState extends State<SongView> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final songTextStyle = theme.primaryTextTheme.headline1.copyWith(
-        fontSize: theme.primaryTextTheme.headline6.fontSize,
+    final songTextStyle = theme.primaryTextTheme.headline1!.copyWith(
+        fontSize: theme.primaryTextTheme.headline6!.fontSize,
         color: Colors.white);
     final disabledColored = theme.disabledColor;
     return Background(
@@ -83,18 +83,18 @@ class _SongViewState extends State<SongView> {
                       controller: widget._albumPageController,
                       scrollDirection: Axis.horizontal,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: widget.allSongs.length,
+                      itemCount: widget.allSongs!.length,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: FutureBuilder<Uint8List>(
                             future: Provider.of<MusicService>(context)
-                                .getArtwork(widget.allSongs[index]),
+                                .getArtwork(widget.allSongs![index]),
                             builder: (context, snapshot) {
                               if (snapshot.hasData &&
                                   snapshot.data != null &&
-                                  snapshot.data.isNotEmpty) {
+                                  snapshot.data!.isNotEmpty) {
                                 return Image.memory(
-                                  snapshot.data,
+                                  snapshot.data!,
                                 );
                               } else {
                                 return Container(
@@ -103,9 +103,9 @@ class _SongViewState extends State<SongView> {
                                   color: Colors.black,
                                   child: Center(
                                     child: Text(
-                                        widget.allSongs[currentPage].album !=
+                                        widget.allSongs![currentPage!].album !=
                                                 null
-                                            ? widget.allSongs[currentPage].album
+                                            ? widget.allSongs![currentPage!].album
                                             : 'no album info'),
                                   ),
                                 );
@@ -122,12 +122,12 @@ class _SongViewState extends State<SongView> {
                       controller: widget._songPageController,
                       scrollDirection: Axis.horizontal,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: widget.allSongs.length,
+                      itemCount: widget.allSongs!.length,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            widget.allSongs[index].title,
+                            widget.allSongs![index].title,
                             style: index == currentPage
                                 ? songTextStyle
                                 : songTextStyle.copyWith(

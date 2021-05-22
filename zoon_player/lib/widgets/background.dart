@@ -76,7 +76,7 @@ class Background extends StatelessWidget {
   const Background(
     this.scrollController,
     this.scaffold, {
-    Key key,
+    Key? key,
   }) : super(key: key);
   get offset => scrollController.hasClients ? scrollController.offset : 0;
   @override

@@ -6,7 +6,6 @@ import 'package:zoon_player/views/home.dart';
 
 import 'views/music_view/music_view.dart';
 import 'views/podcast_view/podcast_view.dart';
-import 'widgets/feature_pending.dart';
 
 void main() {
   runApp(
