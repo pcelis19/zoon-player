@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final headerTextTheme = themeData.textTheme.headline1!;
+    final headerTextTheme = themeData.textTheme.headline1;
     return Background(
       _scrollController,
       SafeArea(
@@ -52,8 +52,8 @@ class Home extends StatelessWidget {
 }
 
 class MenuButton extends StatelessWidget {
-  final String? title;
-  final String? routeName;
+  final String title;
+  final String routeName;
   const MenuButton({this.title, this.routeName});
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class MenuButton extends StatelessWidget {
             title: title,
           ),
           onPressed: () => Navigator.of(context)
-              .pushNamed(routeName!, arguments: {"title": title}),
+              .pushNamed(routeName, arguments: {"title": title}),
         ),
       ),
     );

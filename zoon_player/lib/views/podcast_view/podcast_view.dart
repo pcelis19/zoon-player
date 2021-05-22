@@ -5,11 +5,11 @@ import 'package:zoon_player/widgets/main_menu_text.dart';
 import 'package:podcast_search/podcast_search.dart';
 
 class PodcastsView extends StatelessWidget {
-  final String? title;
+  final String title;
   final ScrollController _scrollController = ScrollController();
   final topPodcasts =
       Search().charts(country: Country.UNITED_STATES, limit: 30);
-  PodcastsView(this.title, {Key? key}) : super(key: key);
+  PodcastsView(this.title, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class PodcastsView extends StatelessWidget {
                 );
               } else if (snapshot.hasData) {
                 final List<Widget> children = [];
-                for (Item item in snapshot.data!.items) {
+                for (Item item in snapshot.data.items) {
                   if (item.artworkUrl100 != null) {
                     children.add(
                       Padding(

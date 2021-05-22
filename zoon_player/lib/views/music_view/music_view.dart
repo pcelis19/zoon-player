@@ -8,14 +8,14 @@ import 'package:zoon_player/widgets/background.dart';
 import 'package:zoon_player/widgets/main_menu_text.dart';
 
 class MusicView extends StatelessWidget {
-  final String? title;
+  final String title;
 
-  MusicView(this.title, {Key? key}) : super(key: key);
+  MusicView(this.title, {Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Provider(
       create: (_) => _MusicMembers(),
-      dispose: (context, dynamic value) => value.dispose(),
+      dispose: (context, value) => value.dispose(),
       builder: (context, child) {
         final musicMembers = Provider.of<_MusicMembers>(context);
         return Background(

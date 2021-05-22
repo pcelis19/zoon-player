@@ -9,13 +9,13 @@ class MusicQueryList extends StatelessWidget {
   final MusicQueryType queryType;
   final ScrollController scrollController;
 
-  const MusicQueryList(this.queryType, this.scrollController, {Key? key})
+  const MusicQueryList(this.queryType, this.scrollController, {Key key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final service = Provider.of<MusicService>(context);
-    return FutureBuilder<List?>(
+    return FutureBuilder<List>(
         future: service.fetchInfo(queryType),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -23,7 +23,7 @@ class MusicQueryList extends StatelessWidget {
               child: Text(snapshot.error.toString()),
             );
           } else if (snapshot.hasData) {
-            final items = snapshot.data!;
+            final items = snapshot.data;
 
             return Padding(
               padding: EdgeInsets.only(left: 32.0),
@@ -57,18 +57,18 @@ class MusicQueryList extends StatelessWidget {
 }
 
 class _ItemButton extends StatelessWidget {
-  final MusicQueryType? queryType;
-  final int? index;
-  final List? items;
-  final ScrollController? scrollController;
+  final MusicQueryType queryType;
+  final int index;
+  final List items;
+  final ScrollController scrollController;
 
   _ItemButton({this.queryType, this.index, this.items, this.scrollController});
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).primaryTextTheme.bodyText1;
     if (queryType == MusicQueryType.songs) {
-      final song = items![index!] as SongInfo;
-      final allSongs = items as List<SongInfo>?;
+      final song = items[index] as SongInfo;
+      final allSongs = items as List<SongInfo>;
       return TextButton(
         onPressed: () => songPressedLogic(context, allSongs),
         child: Text(
@@ -77,7 +77,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.genres) {
-      final genre = items![index!] as GenreInfo;
+      final genre = items[index] as GenreInfo;
       return TextButton(
         onPressed: () => pendingFeature(context),
         child: Text(
@@ -86,7 +86,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.albums) {
-      final album = items![index!] as AlbumInfo;
+      final album = items[index] as AlbumInfo;
       return TextButton(
         onPressed: () => pendingFeature(context),
         child: Text(
@@ -95,7 +95,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.artists) {
-      final artist = items![index!] as ArtistInfo;
+      final artist = items[index] as ArtistInfo;
       return TextButton(
         onPressed: () => pendingFeature(context),
         child: Text(
@@ -104,7 +104,7 @@ class _ItemButton extends StatelessWidget {
         ),
       );
     } else if (queryType == MusicQueryType.playlists) {
-      final playlist = items![index!] as PlaylistInfo;
+      final playlist = items[index] as PlaylistInfo;
       return TextButton(
         onPressed: () => pendingFeature(context),
         child: Text(
@@ -117,12 +117,12 @@ class _ItemButton extends StatelessWidget {
           'Music query type unaccounted for: ${queryType.toString()}');
   }
 
-  void songPressedLogic(BuildContext context, List<SongInfo>? allSongs) {
+  void songPressedLogic(BuildContext context, List<SongInfo> allSongs) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => SongView(
-          index: index!,
+          index: index,
           allSongs: allSongs,
         ),
       ),
