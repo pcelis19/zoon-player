@@ -5,7 +5,7 @@ import 'package:zoon_player/widgets/background.dart';
 import 'package:zoon_player/widgets/feature_pending.dart';
 import 'package:zoon_player/widgets/main_menu_text.dart';
 import 'package:podcast_search/podcast_search.dart';
-import 'package:zoon_player/widgets/podcast/hero_network_images.dart';
+import 'package:zoon_player/views/podcast_view/widgets/hero_network_images.dart';
 
 class PodcastsView extends StatelessWidget {
   final String title;
@@ -38,7 +38,8 @@ class PodcastsView extends StatelessWidget {
                   itemCount: refinedList.length,
                   controller: _scrollController,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
+                    crossAxisCount: 3,
+                  ),
                   itemBuilder: (_, index) => Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: TextButton(
@@ -53,10 +54,12 @@ class PodcastsView extends StatelessWidget {
                         color: Colors.white,
                         elevation: 16,
                         child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            child: PodcastImage100SlamWidth(
-                                item: refinedList[index])),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                          ),
+                          child: PodcastHeroImage100SlamWidth(
+                              item: refinedList[index]),
+                        ),
                       ),
                     ),
                   ),

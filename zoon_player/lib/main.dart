@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:zoon_player/constants/routes.dart';
-import 'package:zoon_player/services/music_service.dart';
 import 'package:zoon_player/services/podcast_service.dart';
 import 'package:zoon_player/views/home.dart';
 
