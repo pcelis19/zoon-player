@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zoon_player/constants/routes.dart';
 import 'package:zoon_player/services/music_service.dart';
@@ -7,19 +8,21 @@ import 'package:zoon_player/views/home.dart';
 
 import 'views/music_view/music_view.dart';
 import 'views/podcast_view/podcast_view.dart';
-import 'widgets/feature_pending.dart';
 
 void main() {
-  runApp(
-    Provider(
-      create: (_) => MusicService(),
-      child: MyApp(),
-    ),
-  );
+  // runApp(
+  //   Provider(
+  //     create: (_) => MusicService(),
+  //     child: MyApp(),
+  //   ),
+  // );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final bool DEBUG = true;
+  final baseTextTheme = GoogleFonts.didactGothicTextTheme();
   final baseTheme = ThemeData.dark();
   final podcastService = PodcastService();
 
