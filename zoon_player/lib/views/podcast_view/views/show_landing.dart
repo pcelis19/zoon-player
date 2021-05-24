@@ -36,6 +36,7 @@ class ShowLanding extends StatelessWidget {
   }
 
   Future<Podcast> get podcast async =>
+      // await Podcast.loadFeed(url: item.feedUrl);
       compute<String, Podcast>(myPodcastLoad, item.feedUrl);
 
   Widget getChild(AsyncSnapshot<Podcast> snapshot) {
