@@ -18,7 +18,7 @@ class PodcastService {
     _controller.close();
   }
 
-  List<podcast.Item> get initialData => _controller.value;
+  List<podcast.Item> get initialData => _controller.valueOrNull;
 
   Stream<List<podcast.Item>> get stream => _stream;
 
