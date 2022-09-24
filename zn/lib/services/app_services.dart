@@ -8,5 +8,5 @@ class AppServices {
 
   late final ILoggerService _loggerService = const DevLoggerService();
 
-  ILoggerService get loggerService => _instance._loggerService;
+  static ILoggerService get loggerService => _instance._loggerService;
 }

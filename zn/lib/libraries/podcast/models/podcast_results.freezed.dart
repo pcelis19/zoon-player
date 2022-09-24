@@ -142,7 +142,10 @@ mixin _$PodcastResult {
   String get feedUrl => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get artist => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  String get imageLg => throw _privateConstructorUsedError;
+  String get imageMd => throw _privateConstructorUsedError;
+  String get imageSm => throw _privateConstructorUsedError;
+  String get imageXsm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PodcastResultCopyWith<PodcastResult> get copyWith =>
@@ -154,7 +157,14 @@ abstract class $PodcastResultCopyWith<$Res> {
   factory $PodcastResultCopyWith(
           PodcastResult value, $Res Function(PodcastResult) then) =
       _$PodcastResultCopyWithImpl<$Res>;
-  $Res call({String feedUrl, String name, String artist, String? imageUrl});
+  $Res call(
+      {String feedUrl,
+      String name,
+      String artist,
+      String imageLg,
+      String imageMd,
+      String imageSm,
+      String imageXsm});
 }
 
 /// @nodoc
@@ -171,7 +181,10 @@ class _$PodcastResultCopyWithImpl<$Res>
     Object? feedUrl = freezed,
     Object? name = freezed,
     Object? artist = freezed,
-    Object? imageUrl = freezed,
+    Object? imageLg = freezed,
+    Object? imageMd = freezed,
+    Object? imageSm = freezed,
+    Object? imageXsm = freezed,
   }) {
     return _then(_value.copyWith(
       feedUrl: feedUrl == freezed
@@ -186,10 +199,22 @@ class _$PodcastResultCopyWithImpl<$Res>
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      imageLg: imageLg == freezed
+          ? _value.imageLg
+          : imageLg // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageMd: imageMd == freezed
+          ? _value.imageMd
+          : imageMd // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageSm: imageSm == freezed
+          ? _value.imageSm
+          : imageSm // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageXsm: imageXsm == freezed
+          ? _value.imageXsm
+          : imageXsm // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -201,7 +226,14 @@ abstract class _$$_PodcastResultCopyWith<$Res>
           _$_PodcastResult value, $Res Function(_$_PodcastResult) then) =
       __$$_PodcastResultCopyWithImpl<$Res>;
   @override
-  $Res call({String feedUrl, String name, String artist, String? imageUrl});
+  $Res call(
+      {String feedUrl,
+      String name,
+      String artist,
+      String imageLg,
+      String imageMd,
+      String imageSm,
+      String imageXsm});
 }
 
 /// @nodoc
@@ -220,7 +252,10 @@ class __$$_PodcastResultCopyWithImpl<$Res>
     Object? feedUrl = freezed,
     Object? name = freezed,
     Object? artist = freezed,
-    Object? imageUrl = freezed,
+    Object? imageLg = freezed,
+    Object? imageMd = freezed,
+    Object? imageSm = freezed,
+    Object? imageXsm = freezed,
   }) {
     return _then(_$_PodcastResult(
       feedUrl: feedUrl == freezed
@@ -235,10 +270,22 @@ class __$$_PodcastResultCopyWithImpl<$Res>
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+      imageLg: imageLg == freezed
+          ? _value.imageLg
+          : imageLg // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageMd: imageMd == freezed
+          ? _value.imageMd
+          : imageMd // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageSm: imageSm == freezed
+          ? _value.imageSm
+          : imageSm // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageXsm: imageXsm == freezed
+          ? _value.imageXsm
+          : imageXsm // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -250,7 +297,10 @@ class _$_PodcastResult extends _PodcastResult {
       {required this.feedUrl,
       required this.name,
       required this.artist,
-      required this.imageUrl})
+      required this.imageLg,
+      required this.imageMd,
+      required this.imageSm,
+      required this.imageXsm})
       : super._();
 
   @override
@@ -260,11 +310,17 @@ class _$_PodcastResult extends _PodcastResult {
   @override
   final String artist;
   @override
-  final String? imageUrl;
+  final String imageLg;
+  @override
+  final String imageMd;
+  @override
+  final String imageSm;
+  @override
+  final String imageXsm;
 
   @override
   String toString() {
-    return 'PodcastResult(feedUrl: $feedUrl, name: $name, artist: $artist, imageUrl: $imageUrl)';
+    return 'PodcastResult(feedUrl: $feedUrl, name: $name, artist: $artist, imageLg: $imageLg, imageMd: $imageMd, imageSm: $imageSm, imageXsm: $imageXsm)';
   }
 
   @override
@@ -275,7 +331,10 @@ class _$_PodcastResult extends _PodcastResult {
             const DeepCollectionEquality().equals(other.feedUrl, feedUrl) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.artist, artist) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
+            const DeepCollectionEquality().equals(other.imageLg, imageLg) &&
+            const DeepCollectionEquality().equals(other.imageMd, imageMd) &&
+            const DeepCollectionEquality().equals(other.imageSm, imageSm) &&
+            const DeepCollectionEquality().equals(other.imageXsm, imageXsm));
   }
 
   @override
@@ -284,7 +343,10 @@ class _$_PodcastResult extends _PodcastResult {
       const DeepCollectionEquality().hash(feedUrl),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(artist),
-      const DeepCollectionEquality().hash(imageUrl));
+      const DeepCollectionEquality().hash(imageLg),
+      const DeepCollectionEquality().hash(imageMd),
+      const DeepCollectionEquality().hash(imageSm),
+      const DeepCollectionEquality().hash(imageXsm));
 
   @JsonKey(ignore: true)
   @override
@@ -297,7 +359,10 @@ abstract class _PodcastResult extends PodcastResult {
       {required final String feedUrl,
       required final String name,
       required final String artist,
-      required final String? imageUrl}) = _$_PodcastResult;
+      required final String imageLg,
+      required final String imageMd,
+      required final String imageSm,
+      required final String imageXsm}) = _$_PodcastResult;
   const _PodcastResult._() : super._();
 
   @override
@@ -307,7 +372,13 @@ abstract class _PodcastResult extends PodcastResult {
   @override
   String get artist;
   @override
-  String? get imageUrl;
+  String get imageLg;
+  @override
+  String get imageMd;
+  @override
+  String get imageSm;
+  @override
+  String get imageXsm;
   @override
   @JsonKey(ignore: true)
   _$$_PodcastResultCopyWith<_$_PodcastResult> get copyWith =>

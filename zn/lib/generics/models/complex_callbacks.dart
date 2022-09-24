@@ -1,7 +1,7 @@
 import 'package:zn/lib.dart';
 
 class ComplexCallBacks<T> {
-  ComplexCallBacks({
+  const ComplexCallBacks({
     this.onSuccess,
     this.onError,
   });
