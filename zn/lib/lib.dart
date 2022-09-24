@@ -7,4 +7,5 @@ export 'main_development.dart';
 export 'main_production.dart';
 export 'main_staging.dart';
 export 'models/models.dart';
+export 'services/services.dart';
 export 'widgets/widgets.dart';
