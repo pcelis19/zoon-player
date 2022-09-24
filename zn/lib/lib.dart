@@ -3,6 +3,7 @@ export 'bootstrap.dart';
 export 'extensions/extensions.dart';
 export 'generics/generics.dart';
 export 'l10n/l10n.dart';
+export 'libraries/libraries.dart';
 export 'main_development.dart';
 export 'main_production.dart';
 export 'main_staging.dart';
