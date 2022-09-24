@@ -1,3 +1,7 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'failure.freezed.dart';
+
+@freezed
 class Failure with _$Failure {
   const factory Failure({
     String? uiTitleError,
@@ -8,6 +12,7 @@ class Failure with _$Failure {
 
   const Failure._();
 
+  // ignore: prefer_constructors_over_static_methods
   static Failure fromObject(Object error, [StackTrace? stackTrace]) {
     if (error is Failure) {
       return error;
