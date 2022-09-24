@@ -9,5 +9,5 @@ import 'package:zn/app/app.dart';
 import 'package:zn/bootstrap.dart';
 
 void main() {
-  bootstrap(() => const App());
+  bootstrap(() => const ZnApp());
 }
