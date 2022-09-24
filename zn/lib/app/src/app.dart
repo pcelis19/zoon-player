@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zn/lib.dart';
 
-class ZnApp extends StatelessWidget {
-  const ZnApp({Key? key}) : super(key: key);
+class ZnApp extends StatefulWidget {
+  const ZnApp({super.key});
+
+  @override
+  State<ZnApp> createState() => _ZnAppState();
+}
+
+class _ZnAppState extends State<ZnApp> {
+  @override
+  void initState() {
+    AppRouter.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('App'),
+    final router = AppRouter.router;
+    return MaterialApp.router(
+      routerDelegate: router.routerDelegate,
+      routeInformationProvider: router.routeInformationProvider,
+      routeInformationParser: router.routeInformationParser,
     );
   }
 }

@@ -7,6 +7,8 @@ export 'libraries/libraries.dart';
 export 'main_development.dart';
 export 'main_production.dart';
 export 'main_staging.dart';
+export 'mixins/mixins.dart';
 export 'models/models.dart';
+export 'screens/screens.dart';
 export 'services/services.dart';
 export 'widgets/widgets.dart';
