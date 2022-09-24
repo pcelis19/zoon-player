@@ -18,6 +18,10 @@ GoRoute get $rootScreenRoute => GoRouteData.$route(
           path: 'podcastHome',
           factory: $PodcastHomeScreenRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'settings',
+          factory: $SettingsScreenRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -39,6 +43,19 @@ extension $PodcastHomeScreenRouteExtension on PodcastHomeScreenRoute {
 
   String get location => GoRouteData.$location(
         '/podcastHome',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+}
+
+extension $SettingsScreenRouteExtension on SettingsScreenRoute {
+  static SettingsScreenRoute _fromState(GoRouterState state) =>
+      SettingsScreenRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

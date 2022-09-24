@@ -1,4 +1,5 @@
 export 'app/app.dart';
+export 'app_cubits/app_cubits.dart';
 export 'bootstrap.dart';
 export 'extensions/extensions.dart';
 export 'generics/generics.dart';

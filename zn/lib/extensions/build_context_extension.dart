@@ -6,4 +6,5 @@ extension BuildContextX on BuildContext {
   TextTheme get textTheme => themeData.textTheme;
   Color get primaryColor => themeData.primaryColor;
   Color get secondaryColor => themeData.colorScheme.secondary;
+  bool get isLightMode => themeData.brightness == Brightness.light;
 }
